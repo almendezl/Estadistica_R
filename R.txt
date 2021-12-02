@@ -1,0 +1,45 @@
+df <- read.csv("../Documents/Delito_Hurto_Personas.csv")
+attach(df)
+install.packages("readr")
+library(readr)
+library(dplyr)
+
+View(df)
+#install.packages("ggplot2")
+#library(ggplot2)
+#ggplot(df, aes(x= SEXO))+geom_bar()
+#ggplot(df, aes(x=EDAD))+geom_bar()
+warnings(df)
+getwd() #saber la ruta de trabajo 
+str(df)
+class(df)
+p <-read_csv("../Documents/Delito_Hurto_Personas.csv",col_types = list("FECHA" = col_date("%d/%m/%Y"),
+                                                                       "DEPARTAMENTO" = col_factor(),
+                                                                       "MUNICIPIO" = col_factor(),
+                                                                       "DIA" = col_factor(),
+                                                                       "HORA" = col_time(),
+                                                                       "BARRIO" = col_character(),
+                                                                       "ZONA"= col_factor(),
+                                                                       "CLASE SITIO"= col_factor(),
+                                                                       "ARMA EMPLEADA" = col_factor(),
+                                                                       "MOVIL AGRESOR" = col_factor(),
+                                                                       "MOVIL VICTIMA" = col_factor(),
+                                                                       "EDAD" = col_number(),
+                                                                       "SEXO" = col_factor(),
+                                                                       "ESTADO CIVIL" = col_factor(),
+                                                                       "PAIS NACE"= col_factor(),
+                                                                       "CLASE EMPLEADO" = col_factor(),
+                                                                       "PROFESION"= col_factor(),
+                                                                       "ESCOLARIDAD" = col_factor(),
+                                                                       "CODIGO DANE"= col_character(), 
+                                                                       "2015" = col_skip()
+                                                                       
+                                                                       ))
+View(p)
+attach(p)
+cundinamarca <- filter(p, DEPARTAMENTO =="CUNDINAMARCA") 
+View(cundinamarca)
+duitama <- filter(p, DEPARTAMENTO %in% c("DUITAMA"))
+menores_edad <- filter(p,p $EDAD < 18)
+edad <- filter(p, EDAD >= 35 & EDAD <=50)
+cinco_tarde <- filter(p, HORA)
